@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogos</title>
+</head>
+<body>
+    <h1>Lista de Jogos</h1>
+
+    <a href="/add">Adicionar novo jogo</a>
+
+<ul>
+    {% for game in games %}
+        <li style="margin-bottom: 20px; list-style: none; border-bottom: 1px solid #ccc;">
+            {% if game.img_url %}
+                <img src="{{ game.img_url }}" alt="{{ game.title }}" style="width: 100px; height: auto;"><br>
+            {% endif %}
+            <strong>{{ game.title }}</strong> ({{ game.tag.value }}) - ⭐ {{ game.rating }}<br>
+            <small>Autor: {{ game.author_name }} | Tamanho: {{ game.size }}</small><br>
+            <a href="{{ game.url }}">JOGAR AGORA</a> | 
+            <a href="/edit/{{ game.id }}">Editar</a>
+            <a href="/game/{{ game.id }}/mappings" style="font-weight: bold; color: green;">Configurar Comandos</a>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

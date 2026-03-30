@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Jogo</title>
+</head>
+<body>
+    <h1>Editar Jogo</h1>
+
+    <form method="POST">
+    Título: <input type="text" name="title" value="{{ game.title }}"><br>
+    URL do Jogo: <input type="text" name="url" value="{{ game.url }}"><br>
+    URL da Imagem: <input type="text" name="img_url" value="{{ game.img_url }}"><br> Tag:
+    <select name="tag">
+        {% for tag in tags %}
+            <option value="{{ tag.name }}" {% if game.tag.name == tag.name %}selected{% endif %}>
+                {{ tag.value }}
+            </option>
+        {% endfor %}
+    </select><br>
+    <button type="submit">Atualizar</button>
+</form>
+
+    <a href="/">Voltar</a>
+</body>
+</html>

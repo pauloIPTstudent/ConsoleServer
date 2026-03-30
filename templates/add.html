@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar Jogo</title>
+</head>
+<body>
+    <h1>Adicionar Jogo</h1>
+
+    <form method="POST">
+    Título: <input type="text" name="title" required><br>
+    URL do Jogo: <input type="text" name="url" required><br>
+    URL da Imagem (Capa): <input type="text" name="img_url" placeholder="http://..."><br> Tag:
+    <select name="tag">
+        {% for tag in tags %}
+            <option value="{{ tag.name }}">{{ tag.value }}</option>
+        {% endfor %}
+    </select><br>
+
+    Autor: <input type="text" name="author"><br>
+    Instituição: <input type="text" name="institution"><br>
+    Tamanho: <input type="text" name="size" placeholder="Ex: 15MB"><br>
+    Rating (0-5): <input type="number" name="rating" min="0" max="5"><br>
+
+    Descrição:<br>
+    <textarea name="description"></textarea><br>
+
+    <button type="submit">Salvar Jogo</button>
+</form>
+
+    <a href="/">Voltar</a>
+</body>
+</html>

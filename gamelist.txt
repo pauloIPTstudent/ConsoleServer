@@ -1,0 +1,5 @@
+The Last Inhabitant - https://dreamshowadventures.github.io/LudumDare29/
+Super Mario Bros - https://martindrapeau.github.io/backbone-game-engine/super-mario-bros/index.html
+Bomberman - https://danielcspaiva.github.io/Bomberman-Clone/
+Mario Kart - https://burnedpopcorn.github.io/SM-Kart-ZX-Web-Port/index.html
+Super Smash - https://www.supersmashflash.com/play/ssf2/

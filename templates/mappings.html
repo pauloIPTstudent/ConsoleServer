@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comandos - {{ game.title }}</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .form-section { background: #f9f9f9; padding: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Configurar Comandos: {{ game.title }}</h1>
+    <a href="/">← Voltar para a lista</a>
+
+    <div class="form-section">
+        <h3>Adicionar Novo Comando</h3>
+        <form method="POST">
+            <label>Jogador:</label>
+            <select name="player_index">
+                <option value="0">Jogador 1</option>
+                <option value="1">Jogador 2</option>
+                <option value="2">Jogador 3</option>
+            </select>
+
+            <label>Botão:</label>
+            <select name="button">
+                {% for b in buttons %}
+                    <option value="{{ b.name }}">{{ b.value }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Tecla PC:</label>
+            <input type="text" name="key" placeholder="Ex: ArrowUp ou W" required>
+
+            <label>Ação:</label>
+            <input type="text" name="description" placeholder="Ex: Pular">
+
+            <button type="submit">Salvar Mapeamento</button>
+        </form>
+    </div>
+
+    <h2>Mapeamentos Atuais</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Jogador</th>
+                <th>Botão do Controle</th>
+                <th>Tecla no Teclado</th>
+                <th>Descrição da Ação</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in mappings %}
+            <tr>
+                <td>Jogador {{ m.player_index + 1 }}</td>
+                <td><strong>{{ m.button.value }}</strong></td>
+                <td><code>{{ m.key }}</code></td>
+                <td>{{ m.description }}</td>
+                <td><a href="/mapping/delete/{{ m.id }}" style="color: red;">Remover</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
