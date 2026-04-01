@@ -62,10 +62,10 @@ class Game(db.Model):
         return new_game
     
 class ControllerButton(enum.Enum):
-    UP = "Cima"
-    DOWN = "Baixo"
-    LEFT = "Esquerda"
-    RIGHT = "Direita"
+    UP = "ArrowUp"
+    DOWN = "ArrowDown"
+    LEFT = "ArrowLeft"
+    RIGHT = "ArrowRight"
     A = "A"
     B = "B"
     X = "X"

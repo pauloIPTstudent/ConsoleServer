@@ -101,7 +101,7 @@ def game_mappings(game_id):
             key=request.form['key'],
             description=request.form['description']
         )
-        db.session.add(new_game_mapping) # Correção: use o objeto criado
+        #db.session.add(new_game_mapping) # Correção: use o objeto criado
         db.session.add(new_mapping)
         db.session.commit()
         return redirect(url_for('game_mappings', game_id=game.id))
@@ -119,6 +119,26 @@ def delete_mapping(id):
     db.session.commit()
     return redirect(url_for('game_mappings', game_id=game_id))
 
+@app.route("/mappings/<int:game_id>")
+def get_mappings(game_id):
+    # Busca todos os mappings do jogo
+    mappings = KeyMapping.query.filter_by(game_id=game_id).all()
+    
+    # Monta lista de dicts para JSON
+    result = []
+    for m in mappings:
+        result.append({
+            "player_index": m.player_index,
+            "button": m.button.value,   # Enum -> string
+            "key": m.key,
+            "description": m.description
+        })
+    
+    return jsonify(result)
+
+@app.route('/controlo')
+def controlo():
+    return render_template('app.html')
 
 if __name__ == '__main__': 
     port = int(os.environ.get("PORT", 5000)) 
