@@ -99,11 +99,22 @@
   const MQTT_BROKER = 'ws://192.168.1.233:9001';
   const MQTT_TOPIC = 'game/control';
 
+  let deviceId = localStorage.getItem('device_id');
+  if (!deviceId) {
+      deviceId = 'dev_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('device_id', deviceId);
+  }
+
   const client = mqtt.connect(MQTT_BROKER);
 
   function send(button, action) {
-    const msg = JSON.stringify({ button: button, action: action });
-    client.publish(MQTT_TOPIC, msg);
+      // Agora enviamos o device_id junto
+      const msg = JSON.stringify({ 
+          device_id: deviceId, 
+          button: button, 
+          action: action 
+      });
+      client.publish(MQTT_TOPIC, msg);
   }
 
   const allButtons = document.querySelectorAll('button');
