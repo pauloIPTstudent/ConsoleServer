@@ -41,6 +41,11 @@
     const PASS = "Qwe12345";
     const TOPIC = "game/control";
     // ------------------------------
+    let deviceId = localStorage.getItem('device_id');
+    if (!deviceId) {
+        deviceId = 'dev_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('device_id', deviceId);
+    }
 
     const client = new Paho.MQTT.Client(BROKER, PORT, "client_" + Math.random().toString(16).substr(2, 8));
 
@@ -61,7 +66,7 @@
 
     function send(btnId, action) {
         if (client.isConnected()) {
-            const message = new Paho.MQTT.Message(JSON.stringify({ button: btnId, action: action }));
+            const message = new Paho.MQTT.Message(JSON.stringify({ button: btnId, action: action,device_id: deviceId }));
             message.destinationName = TOPIC;
             client.send(message);
             if(action === 'press' && navigator.vibrate) navigator.vibrate(40);
